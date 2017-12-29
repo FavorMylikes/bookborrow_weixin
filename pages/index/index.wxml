@@ -19,7 +19,8 @@
   </view>
   <view style='flex-flow:row wrap;'>
     <view wx:key="owners" wx:for="{{owners}}" wx:for-item="item" style='display:flex;flex-flow:row wrap;'>
-      <text style='flex:1;margin:10rpx;border-radius:20rpx;background-color:{{item.color}}'>{{item.name}}</text>
+   <!--   <text style='flex:1;margin:10rpx;border-radius:20rpx;background-color:{{item.color}}'>{{item.name}}</text>-->
+   <image bindtap="bindViewTap" class="userinfo-avatar-md" src="{{item.avatarUrl}}" background-size="cover"></image>
     </view>
   </view>
   <view style='display:flex;flex-flow:row;'>

@@ -1,7 +1,8 @@
 //index.js
+var fv = require('../../utils/request.js')
 //获取应用实例
 const app = getApp()
-app.globalData.colors = ['palegoldenrod', 'beige', 'lightgoldenrodyellow']
+//app.globalData.colors = ['palegoldenrod', 'beige', 'lightgoldenrodyellow']
 app.globalData.isbn=''
 Page({
   data: {
@@ -46,6 +47,14 @@ Page({
         }
       })
     }
+    if (!app.globalData.geoInfo){
+      wx.getLocation({
+        type: 'wgs84',
+        success: res => {
+          app.globalData.geoInfo = res
+        }
+      })
+    }
   },
   scan: function (e) {
     console.log(e)
@@ -64,7 +73,7 @@ Page({
         }
         app.globalData.isbn = res.result
         console.log(app.globalData.isbn)
-        wx.request({
+        fv.request({
           url: "https://favormylikes.com/bookborrow/api/search/?isbn=" + app.globalData.isbn + "&user=" + this.data.userInfo.nickName,
           success: (res) => {
             console.log(res)
@@ -77,34 +86,26 @@ Page({
             config.own_it = 'hide'
             config.own_it_too = 'hide'
             if (res.data.title == "没找到"){console.log(config)}
-            else if (res.data.nick_name.length == 0) {
+            else if (res.data.users.length == 0) {
               config.own_it = 'show'
             } else {
-              console.log(this.data.userInfo.nickName)
-              console.log(res.data.nick_name)
-              var index = res.data.nick_name.indexOf(this.data.userInfo.nickName)
-              var names = []
-              for (var n in res.data.nick_name) {
-                var name = {
-                  name: res.data.nick_name[n],
-                  color: app.globalData.colors[Math.floor(Math.random() * app.globalData.colors.length)]
+              var index = -1
+              var users = []
+              for (var n in res.data.users) {
+                var user = {
+                  name: res.data.users[n].nickName,
+                  avatarUrl: res.data.users[n].avatarUrl
+                  //color: app.globalData.colors[Math.floor(Math.random() * app.globalData.colors.length)]
                 }
-                names.push(name)
+                if (user.name == app.globalData.userInfo.nickName) index = n
+                users.push(user)
               }
               if (index == -1) {
                 config.own_it_too = 'show'
-                if (!app.globalData.geoInfo) {
-                  wx.getLocation({
-                    type: 'wgs84',
-                    success: function (res) {
-                      app.globalData.geoInfo = res
-                      console.log(res)
-                    }
-                  })
-                }
-              } else { config.owners_class = 'show' }
-              config.owners = names
-              console.log(names)
+              } else {
+                config.owners_class = 'show' 
+              }
+              config.owners = users
             }
             this.setData(config)
           },
@@ -118,18 +119,12 @@ Page({
   add:function(e){
     var userinfo = app.globalData.userInfo
     var geoinfo = app.globalData.geoInfo
-    wx.request({
+    fv.request({
       url: "https://favormylikes.com/bookborrow/api/add",
       method: "GET",
       data:{
         isbn: app.globalData.isbn,
-        nick_name: userinfo.nickName,
-        avatar_url: userinfo.avatarUrl,
-        gender: userinfo.gender,
-        language: userinfo.language,
-        country: userinfo.country,
-        province: userinfo.province,
-        city: userinfo.city,
+        accuracy: geoinfo.accuracy,
         latitude: geoinfo.latitude,
         longitude: geoinfo.longitude,
         altitude: geoinfo.altitude === undefined ? -1 : geoinfo.altitude,
@@ -142,6 +137,7 @@ Page({
         config.own_it='hide'
         config.own_it_too = 'hide'
         config.owners_class='show'
+        config.owners = []
         var name = {
           name: userinfo.nickName,
           color: app.globalData.colors[Math.floor(Math.random() * app.globalData.colors.length)]
