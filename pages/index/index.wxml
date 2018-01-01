@@ -11,7 +11,7 @@
                         {{userInfo.bookNumber}}本书
                     </view>
                     <view class="avatar-info-book-item">
-                        {{userInfo.commentNumber}}关注
+                        {{userInfo.followeeNumber}}关注
                     </view>
                     <view class="avatar-info-book-item">
                         {{userInfo.followerNumber}}赞同

@@ -30,6 +30,20 @@ Page({
     },
     onLoad: function () {
         if (app.globalData.userInfo) {
+            if (!app.globalData.userInfo.bookNumber){
+                fv.request({
+                    url: "https://favormylikes.com/bookborrow/api/userinfo",
+                    success: res => {
+                        app.globalData.userInfo.bookNumber=res.data.book_count
+                        app.globalData.userInfo.followeeNumber=res.data.followee_count
+                        app.globalData.userInfo.likeNumber=res.data.like_count
+                        this.setData({
+                            userInfo: app.globalData.userInfo,
+                            hasUserInfo: true
+                        })
+                    }
+                })
+            }
             this.setData({
                 userInfo: app.globalData.userInfo,
                 hasUserInfo: true
@@ -39,6 +53,14 @@ Page({
             wx.getUserInfo({
                 success: res => {
                     app.globalData.userInfo = res.userInfo
+                    fv.request({
+                        url: "https://favormylikes.com/bookborrow/api/userinfo",
+                        success: res => {
+                            app.globalData.userInfo.bookNumber=res.data.book_count
+                            app.globalData.userInfo.followeeNumber=res.data.followee_count
+                            app.globalData.userInfo.likeNumber=res.data.like_count
+                        }
+                    })
                     console.log(res)
                     this.setData({
                         userInfo: res.userInfo,
@@ -102,7 +124,7 @@ Page({
                                 if (user.name === app.globalData.userInfo.nickName) index = n
                                 users.push(user)
                             }
-                            if (index == -1) {
+                            if (index === -1) {
                                 config.own_it_too = 'show'
                             } else {
                                 config.owners_class = 'show'
