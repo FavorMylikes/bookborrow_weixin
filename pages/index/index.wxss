@@ -1,43 +1,96 @@
-/**index.wxss**/
+@import "../../dist/style/wxui.wxss";
 .userinfo {
+  display: -webkit-box;
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
+.avatar,
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
   margin: 20rpx;
+}
+.userinfo-avatar {
   border-radius: 50%;
 }
-
 .userinfo-nickname {
   color: #aaa;
 }
-
 .usermotto {
   margin-top: 200px;
 }
-
-.show{
+.show {
+  display: -webkit-box;
+  display: -webkit-flex;
   display: flex;
 }
-
-.hide{
+.hide {
   display: none;
 }
-
 .userinfo-avatar-sm {
   width: 32rpx;
   height: 32rpx;
   margin: 20rpx;
   border-radius: 50%;
 }
-
 .userinfo-avatar-md {
   width: 64rpx;
   height: 64rpx;
   margin: 20rpx;
   border-radius: 50%;
+}
+.avatar-card {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.avatar-card .avatar-image {
+  width: 128rpx;
+  height: 128rpx;
+}
+.avatar-card .avatar-info {
+  margin: 0 0 0 20rpx;
+  font-size: 30rpx;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+.avatar-card .avatar-info .avatar-info-nickname {
+  color: #0E0E0E;
+}
+.avatar-card .avatar-info .avatar-info-book {
+  font-size: smaller;
+  color: #282828;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.avatar-card .avatar-info .avatar-info-book .avatar-info-book-item {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+.avatar-card .avatar-info .avatar-info-badge {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin: 0 350rpx 0 0;
+  font-size: smaller  ;
+  color: #414141;
+}
+.avatar-card .avatar-info .avatar-info-badge .avatar-info-badge-item {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+.badge-1 {
+  color: rgb(255,204,1);
+}
+.badge-2 {
+  color: rgb(180,184,188);
+}
+.badge-3 {
+  color: rgb(209,166,132);
 }

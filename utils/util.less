@@ -1,0 +1,19 @@
+@color-nickname:#0E0E0E;
+@color-book:lighten(@color-nickname,10%);
+@color-badge:lighten(@color-book,10%);
+
+@color-badge-1:~"rgb(255,204,1)";
+@color-badge-2:~"rgb(180,184,188)";
+@color-badge-3:~"rgb(209,166,132)";
+
+.display-flex(){
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.display-flex-size(@size){
+  -webkit-box-flex: @size;
+  -webkit-flex: @size;
+  flex: @size
+}

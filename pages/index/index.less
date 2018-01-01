@@ -1,0 +1,95 @@
+@import (css) "../../dist/style/wxui.wxss";
+@import (reference) "../../utils/util.less";
+
+.userinfo {
+  .display-flex();
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar{
+  width: ~"128rpx";
+  height: ~"128rpx";
+  margin: ~"20rpx";
+}
+
+.userinfo-avatar {
+  &:extend(.avatar);
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.show{
+  .display-flex();
+}
+
+.hide{
+  display: none;
+}
+
+.userinfo-avatar-sm {
+  width: ~"32rpx";
+  height: ~"32rpx";
+  margin: ~"20rpx";
+  border-radius: 50%;
+}
+
+.userinfo-avatar-md {
+  width: ~"64rpx";
+  height: ~"64rpx";
+  margin: ~"20rpx";
+  border-radius: 50%;
+}
+
+.avatar-card {
+  .display-flex();
+  .avatar-image{
+    width: ~"128rpx";
+    height: ~"128rpx";
+  }
+  .avatar-info {
+    margin:~"0 0 0 20rpx";
+    font-size:~"30rpx";
+    .display-flex-size(1);
+    .avatar-info-nickname{
+      color:@color-nickname
+    }
+    .avatar-info-book{
+      font-size: smaller;
+      color:@color-book;
+      .display-flex();
+      .avatar-info-book-item{
+        .display-flex-size(1);
+      }
+    }
+    .avatar-info-badge{
+      .display-flex();
+      margin: ~"0 350rpx 0 0";
+      font-size: smaller  ;
+      color:@color-badge;
+      .avatar-info-badge-item{
+        .display-flex-size(1)
+
+      }
+    }
+  }
+}
+
+.badge-1{
+  color:@color-badge-1;
+}
+
+.badge-2{
+  color:@color-badge-2;
+}
+
+.badge-3{
+  color:@color-badge-3;
+}

@@ -1,0 +1,87 @@
+/* pages/util/flex.wxss */
+@import (css) "../../dist/style/wxui.wxss";
+@import (reference) "../../utils/util.less";
+
+
+.avatar-card {
+  .display-flex();
+  padding: ~"20rpx";
+  .avatar-image{
+    width: ~"128rpx";
+    height: ~"128rpx";
+  }
+  .avatar-info {
+    margin:~"0 0 0 20rpx";
+    font-size:~"30rpx";
+    .display-flex-size(1);
+    .avatar-info-nickname{
+      color:@color-nickname
+    }
+    .avatar-info-book{
+      font-size: smaller;
+      color:@color-book;
+      .display-flex();
+      .avatar-info-book-item{
+        .display-flex-size(1);
+      }
+    }
+    .avatar-info-badge{
+      .display-flex();
+      margin: ~"0 400rpx 0 0";
+      font-size: smaller;
+      color:@color-badge;
+      .avatar-info-badge-item{
+        .display-flex-size(1)
+
+      }
+    }
+  }
+}
+
+.badge-1{
+  color:~"rgb(255,204,1)";
+}
+
+.badge-2{
+   color:~"rgb(180,184,188)";
+}
+
+.badge-3{
+  color:~"rgb(209,166,132)";
+}
+
+.weui-flex {
+  .display-flex;
+}
+
+.weui-flex__item {
+  .display-flex-size(1)
+}
+
+.page {
+  background-color: #EEEEEE;
+}
+
+.page__hd {
+  background-color: #DDDDDD;
+}
+
+.page__title {
+  background-color: #CCCCCC;
+}
+
+.page__desc {
+  background-color: #BBBBBB;
+}
+
+.page__bd_spacing {
+  background-color: #AAAAAA;
+}
+
+.weui-flex {
+  background-color: #999999;
+}
+
+.weui-flex__item {
+  background-color: #888888;
+}
