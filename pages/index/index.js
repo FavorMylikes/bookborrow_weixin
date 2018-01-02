@@ -29,46 +29,46 @@ Page({
         })
     },
     onLoad: function () {
-        if (app.globalData.userInfo) {
-            if (!app.globalData.userInfo.bookNumber){
-                fv.request({
-                    url: "https://favormylikes.com/bookborrow/api/userinfo",
-                    success: res => {
-                        app.globalData.userInfo.bookNumber=res.data.book_count
-                        app.globalData.userInfo.followeeNumber=res.data.followee_count
-                        app.globalData.userInfo.likeNumber=res.data.like_count
-                        this.setData({
-                            userInfo: app.globalData.userInfo,
-                            hasUserInfo: true
-                        })
-                    }
-                })
-            }
-            this.setData({
+        let that = this;
+        setTimeout(function(){
+            that.setData({
                 userInfo: app.globalData.userInfo,
                 hasUserInfo: true
             })
-        } else {
+        },1000)
+        // if (app.globalData.userInfo) {
+        //
+        // } else {
             // 在没有 open-type=getUserInfo 版本的兼容处理
-            wx.getUserInfo({
-                success: res => {
-                    app.globalData.userInfo = res.userInfo
-                    fv.request({
-                        url: "https://favormylikes.com/bookborrow/api/userinfo",
-                        success: res => {
-                            app.globalData.userInfo.bookNumber=res.data.book_count
-                            app.globalData.userInfo.followeeNumber=res.data.followee_count
-                            app.globalData.userInfo.likeNumber=res.data.like_count
-                        }
-                    })
-                    console.log(res)
-                    this.setData({
-                        userInfo: res.userInfo,
-                        hasUserInfo: true
-                    })
-                }
-            })
-        }
+            // wx.getUserInfo({
+            //     success: res => {
+            //         app.globalData.userInfo = res.userInfo
+            //         fv.request({
+            //             url: "https://favormylikes.com/bookborrow/api/check",
+            //             method: "GET",
+            //             data: {
+            //                 code: app.globalData.code,
+            //                 encryptedData: res.encryptedData,
+            //                 rawData: res.rawData,
+            //                 iv: res.iv,
+            //                 signature: res.signature
+            //             },
+            //             success: res => {
+            //                 app.globalData.userInfo.bookNumber=res.data.book_count
+            //                 app.globalData.userInfo.followeeNumber=res.data.followee_count
+            //                 app.globalData.userInfo.likeNumber=res.data.like_count
+            //                 this.setData({
+            //                     userInfo: app.globalData.userInfo,
+            //                     hasUserInfo: true
+            //                 })
+            //             },
+            //             fail: err => {
+            //
+            //             }
+            //         })
+            //     }
+            // })
+        // }
         if (!app.globalData.geoInfo) {
             wx.getLocation({
                 type: 'wgs84',
