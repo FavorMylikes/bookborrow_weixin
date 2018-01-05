@@ -1,11 +1,9 @@
 
 {
   "pages": [
-
     "pages/index/index",
     "pages/util/flex",
     "pages/logs/logs"
-    
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -14,7 +14,7 @@
                         {{userInfo.followeeNumber}}关注
                     </view>
                     <view class="avatar-info-book-item">
-                        {{userInfo.followerNumber}}赞同
+                        {{userInfo.likeNumber}}赞同
                     </view>
                 </view>
                 <view class="avatar-info-badge">
