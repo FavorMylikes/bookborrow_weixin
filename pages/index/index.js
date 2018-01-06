@@ -7,12 +7,7 @@ const app = getApp()
 app.globalData.isbn = ''
 Page({
     data: {
-        motto: 'Hello World',
-        name: '',
-        author: '',
-        translator: '',
-        publisher: '',
-        img: '',
+        book: {},
         own_it: 'hide',
         own_it_too: 'hide',
         owners: [],
@@ -67,14 +62,15 @@ Page({
                         method: "GET"
                     })
                 }
-            })
+            })//扫描回调
             .then((res) => {
                 let config = {}
-                config.name = res.data.title + "," + res.data.rate + "★"
-                config.author = res.data.author
-                config.translator = res.data.translator
-                config.publisher = res.data.publisher
-                config.img = res.data.img
+                config.book = {}
+                config.book.name = res.data.title + "," + res.data.rate + "★"
+                config.book.author = res.data.author
+                config.book.translator = res.data.translator ? res.data.translator : undefined
+                config.book.publisher = res.data.publisher
+                config.book.image = res.data.img
                 config.owners_class = 'hide'
                 config.own_it = 'hide'
                 config.own_it_too = 'hide'
@@ -104,7 +100,7 @@ Page({
                     config.owners = users
                 }
                 this.setData(config)
-            })
+            })//查询回调
             .catch(fv.exception)
     },
     add: function (e) {
@@ -122,7 +118,7 @@ Page({
                 horizontal_accuracy: geoinfo.horizontalAccuracy
             },
             method: "GET",
-        })
+        })//添加书籍
             .then((res) => {
                 let config = {};
                 config.own_it = 'hide'
@@ -142,24 +138,22 @@ Page({
             .catch(fv.exception)
     },
     test: function (e) {
-        wx.login({
-            success: res => {
+        fv.login()
+            .then((res) => {
                 let code = res.code; // 复制给变量就可以打印了，醉了
                 if (res.code) {
-                    wx.getUserInfo({
-                        success: function (res) {
-                            // userInfo 只存储个人的基础数据
-                            wx.setStorageSync('userInfo', res.userInfo);
-
-                            // 只获取openid的话，自己就可以
-                            that.getOpenid(code);
-                        }
-                    })
+                    return fv.getUserInfo()
                 } else {
-                    console.log('获取用户登录态失败！' + res.errMsg)
+                    return Promise.reject("获取用户登录态失败！" + res.errMsg)
                 }
-            }
-        })
+            })
+            .then((res) => {
+                // userInfo 只存储个人的基础数据
+                wx.setStorageSync('userInfo', res.userInfo);
+                // 只获取openid的话，自己就可以
+                that.getOpenid(code);
+            })
+            .catch(fv.exception)
         wx.getUserInfo({
             withCredentials: true,
             success: (res) => {

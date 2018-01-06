@@ -1,58 +1,62 @@
 <!--index.wxml-->
-<view class="container">
-    <view class="page__hd">
-        <view class="avatar-card">
-            <image class="avatar-image"
-                   src="https://wx.qlogo.cn/mmopen/vi_32/iaadC5T6yx7ZZottSryThlVr8Jyy9qyibAO0mPMvlpR0pJQpCqEwfJlJajicekWb5jM7utc2A5PibXwrURydwwmpBQ/0"></image>
-            <view class="avatar-info">
-                <view class="avatar-info-nickname">{{userInfo.nickName}}</view>
-                <view class="avatar-info-book">
-                    <view class="avatar-info-book-item">
-                        {{userInfo.bookNumber}}本书
-                    </view>
-                    <view class="avatar-info-book-item">
-                        {{userInfo.followeeNumber}}关注
-                    </view>
-                    <view class="avatar-info-book-item">
-                        {{userInfo.likeNumber}}赞同
-                    </view>
+<view class="page__hd">
+    <view class="avatar-card">
+        <image class="avatar-image"
+               src="https://wx.qlogo.cn/mmopen/vi_32/iaadC5T6yx7ZZottSryThlVr8Jyy9qyibAO0mPMvlpR0pJQpCqEwfJlJajicekWb5jM7utc2A5PibXwrURydwwmpBQ/0"></image>
+        <view class="avatar-info">
+            <view class="avatar-info-nickname">{{userInfo.nickName}}</view>
+            <view class="avatar-info-book">
+                <view class="avatar-info-book-item">
+                    {{userInfo.bookNumber}}本书
                 </view>
-                <view class="avatar-info-badge">
-                    <view class="avatar-info-badge-item">
-                        <i class="fa fa-certificate badge-1"></i>1
-                    </view>
-                    <view class="avatar-info-badge-item">
-                        <i class="fa fa-certificate badge-2"></i>3
-                    </view>
-                    <view class="avatar-info-badge-item">
-                        <i class="fa fa-certificate badge-3"></i>30
-                    </view>
+                <view class="avatar-info-book-item">
+                    {{userInfo.followeeNumber}}关注
+                </view>
+                <view class="avatar-info-book-item">
+                    {{userInfo.likeNumber}}赞同
+                </view>
+            </view>
+            <view class="avatar-info-badge">
+                <view class="avatar-info-badge-item">
+                    <i class="fa fa-certificate badge-1"></i>1
+                </view>
+                <view class="avatar-info-badge-item">
+                    <i class="fa fa-certificate badge-2"></i>3
+                </view>
+                <view class="avatar-info-badge-item">
+                    <i class="fa fa-certificate badge-3"></i>30
                 </view>
             </view>
         </view>
     </view>
-    <view style='display:flex;width:90%;height:600rpx;flex-flow:row;justify-content:center;background-color:#ffffff;'>
-        <image src="{{img}}" mode="aspectFit" style='flex:2;background-color:#ffffff;align-self:center'></image>
-        <view style='flex:3;background-color:#ffffff;align-self:center'>
-            <view style='display:flex;flex-flow:column;'>
-                <text style='flex:1;padding:20rpx;'>{{name}}</text>
-                <text style='flex:1;padding:20rpx;'>{{author}}</text>
-                <text style='flex:1;padding:20rpx;'>{{translator}}</text>
-                <text style='flex:1;padding:20rpx;'>{{publisher}}</text>
-            </view>
-        </view>
-    </view>
-    <view style='flex-flow:row wrap;'>
-        <view wx:key="owners" wx:for="{{owners}}" wx:for-item="item" style='display:flex;flex-flow:row wrap;'>
-            <!--   <text style='flex:1;margin:10rpx;border-radius:20rpx;background-color:{{item.color}}'>{{item.name}}</text>-->
-            <image bindtap="bindViewTap" class="userinfo-avatar-md" src="{{item.avatarUrl}}"
-                   background-size="cover"></image>
-        </view>
-    </view>
-    <view style='display:flex;flex-flow:row;'>
-        <button bindtap="scan" class="show" style='padding:20rpx'><i class="fa fa-barcode">扫描</i></button>
-        <button bindtap="add" class="{{own_it}}" style='padding:20rpx'><i class="fa fa-flag">声明所有权</i></button>
-        <button bindtap="add" class="{{own_it_too}}" style='padding:20rpx'><i class="fa fa-flus"> 我也有一本</i></button>
-    </view>
-    <view class="{{message_class}}">{{message}}</view>
 </view>
+<view class="page__bd page__bd_spacing">
+    <view class="book-describe">
+        <image class="book-image" src="{{book.image}}" mode="aspectFit"></image>
+        <view class="book-info">
+            <view class="book-info-items">
+                <text class="book-info-item">{{book.name}}</text>
+                <text class="book-info-item">{{book.author}}</text>
+                <text class="book-info-item">{{book.translator}}</text>
+                <text class="book-info-item">{{book.publisher}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view style='flex-flow:row wrap;'>
+    <view wx:key="owners" wx:for="{{owners}}" wx:for-item="item" style='display:flex;flex-flow:row wrap;'>
+        <image bindtap="bindViewTap" class="userinfo-avatar-md" src="{{item.avatarUrl}}"
+               background-size="cover"></image>
+    </view>
+</view>
+<view class="{{message_class}}">{{message}}</view>
+
+<view class="page__ft">
+    <view class="button-items">
+        <button bindtap="scan" class="show"><i class="fa fa-barcode">扫描</i></button>
+        <button bindtap="add" class="{{own_it}}"><i class="fa fa-flag">声明所有权</i></button>
+        <button bindtap="add" class="{{own_it_too}}"><i class="fa fa-flus">我也有一本</i></button>
+    </view>
+    <text class="book-info-item">{{translator}}</text>
+</view>
+

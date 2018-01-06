@@ -6,14 +6,34 @@
 @color-badge-2:~"rgb(180,184,188)";
 @color-badge-3:~"rgb(209,166,132)";
 
-.display-flex(){
+.flex(){
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
 }
 
-.display-flex-size(@size){
+.flex-size(@size){
   -webkit-box-flex: @size;
   -webkit-flex: @size;
   flex: @size
+}
+
+.flex-flow(@args){
+  -webkit-flex-flow:@args;
+  flex-flow:@args;
+}
+
+.justify-content(@args){
+  -webkit-justify-content: @args;
+  justify-content: @args;
+}
+
+.align-self(@args){
+  -webkit-align-self: @args;
+  align-self:@args;
+}
+
+.align-items(@args){
+  -webkit-align-items: @args;
+  align-items: @args;
 }
